@@ -2,7 +2,7 @@
 #define KDTREE_SHARED_BLOOM_H
 
 #define XXH_PRIVATE_API
-#include <common/geometry.h>
+#include <kdtree/shared/geometry.h>
 #include <parlay/parallel.h>
 #include <parlay/sequence.h>
 #include <xxHash/xxhash.h>

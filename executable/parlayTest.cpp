@@ -5,7 +5,7 @@
 #include "parlay/sequence.h"
 #include "parlay/primitives.h"
 
-#include "common/geometry.h"
+#include "kdtree/shared/geometry.h"
 #include "common/geometryIO.h"
 
 #include "../include/kdtree/shared/utils.h"

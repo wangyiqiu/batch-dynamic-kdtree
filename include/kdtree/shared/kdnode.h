@@ -4,7 +4,7 @@
 #include <atomic>
 #include "parlay/parallel.h"
 #include "parlay/sequence.h"
-#include "common/geometry.h"
+#include "kdtree/shared/geometry.h"
 
 #include "macro.h"
 #include "knnbuffer.h"

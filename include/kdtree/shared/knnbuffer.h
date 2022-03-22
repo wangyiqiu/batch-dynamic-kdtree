@@ -4,7 +4,7 @@
 // TAKEN with slight modifications FROM
 // https://github.mit.edu/yiqiuw/pargeo/blob/master/knnSearch/kdTree/kdtKnn.h Later, need to merge +
 // refer to that rather than copying here
-#include <common/geometry.h>
+#include <kdtree/shared/geometry.h>
 namespace knnBuf {
 
 typedef int intT;

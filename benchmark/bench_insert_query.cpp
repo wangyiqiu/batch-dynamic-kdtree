@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "parlay/parallel.h"
 #include "common/get_time.h"
-#include "common/geometry.h"
+#include "kdtree/shared/geometry.h"
 #include "common/geometryIO.h"
 #include "common/parse_command_line.h"
 
