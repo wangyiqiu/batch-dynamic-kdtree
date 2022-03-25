@@ -128,7 +128,7 @@ public:
     for (int i=0; i<_dim; ++i) xx += (x[i]-p.x[i])*(x[i]-p.x[i]);
     return sqrt(xx);}
 
-  inline floatT distSqr(pointT p) {
+  inline floatT distSqr(const pointT &p) const {
     floatT xx=0;
     for (int i=0; i<_dim; ++i) xx += (x[i]-p.x[i])*(x[i]-p.x[i]);
     return xx;}
