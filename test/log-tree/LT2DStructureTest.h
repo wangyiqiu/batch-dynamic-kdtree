@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 #include "common/geometryIO.h"
 
-#include <kdtree/log-tree/logtree.h>
+#include <batchKdtree/log-tree/logtree.h>
 
 typedef point<2> pointT;
 pointT constructPoint(double d) {

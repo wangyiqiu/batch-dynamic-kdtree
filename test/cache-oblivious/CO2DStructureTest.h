@@ -3,8 +3,8 @@
 #include <gtest/gtest.h>
 #include "common/geometryIO.h"
 
-#include <kdtree/cache-oblivious/cokdtree.h>
-#include <kdtree/shared/macro.h>
+#include <batchKdtree/cache-oblivious/cokdtree.h>
+#include <batchKdtree/shared/macro.h>
 
 #include "../shared/BasicStructure.h"
 

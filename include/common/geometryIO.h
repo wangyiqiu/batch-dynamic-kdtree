@@ -23,7 +23,7 @@
 #pragma once
 #include "parlay/parallel.h"
 #include "parlay/primitives.h"
-#include "kdtree/shared/geometry.h"
+#include "batchKdtree/shared/geometry.h"
 #include "IO.h"
 
 //using namespace geometry;

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "common/geometryIO.h"
 
-#include <kdtree/cache-oblivious/cokdtree.h>
+#include <batchKdtree/cache-oblivious/cokdtree.h>
 
 #include "CO2DStructureTest.h"
 #include "../shared/Shared2DTest.h"

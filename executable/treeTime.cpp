@@ -24,14 +24,14 @@
 #include <algorithm>
 #include "parlay/parallel.h"
 #include "common/get_time.h"
-#include "kdtree/shared/geometry.h"
+#include "batchKdtree/shared/geometry.h"
 #include "common/geometryIO.h"
 #include "common/parse_command_line.h"
 
-#include "kdtree/cache-oblivious/cokdtree.h"
-#include "kdtree/binary-heap-layout/bhlkdtree.h"
-#include "kdtree/log-tree/logtree.h"
-#include "kdtree/shared/dual.h"
+#include "batchKdtree/cache-oblivious/cokdtree.h"
+#include "batchKdtree/binary-heap-layout/bhlkdtree.h"
+#include "batchKdtree/log-tree/logtree.h"
+#include "batchKdtree/shared/dual.h"
 
 using namespace benchIO;
 

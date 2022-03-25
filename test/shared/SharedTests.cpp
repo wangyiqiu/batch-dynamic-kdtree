@@ -1,8 +1,8 @@
 #include <set>
 #include <gtest/gtest.h>
 #include "common/geometryIO.h"
-#include "kdtree/shared/box.h"
-#include "kdtree/shared/bloom.h"
+#include "batchKdtree/shared/box.h"
+#include "batchKdtree/shared/bloom.h"
 #include "BasicStructure.h"
 
 class SharedTests : public ::testing::Test {};

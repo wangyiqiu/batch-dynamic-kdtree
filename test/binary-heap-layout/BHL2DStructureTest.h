@@ -4,8 +4,8 @@
 #include <gtest/gtest.h>
 #include "common/geometryIO.h"
 
-#include <kdtree/binary-heap-layout/bhlkdtree.h>
-#include <kdtree/shared/macro.h>
+#include <batchKdtree/binary-heap-layout/bhlkdtree.h>
+#include <batchKdtree/shared/macro.h>
 
 #include "../shared/BasicStructure.h"
 

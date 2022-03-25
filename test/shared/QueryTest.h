@@ -6,8 +6,8 @@
 #include "common/geometryIO.h"
 
 #include <algorithm>
-#include <kdtree/shared/box.h>
-#include <kdtree/shared/dual.h>
+#include <batchKdtree/shared/box.h>
+#include <batchKdtree/shared/dual.h>
 
 typedef point<2> pointT;
 template <typename Tree>

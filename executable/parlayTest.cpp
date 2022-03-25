@@ -5,11 +5,11 @@
 #include "parlay/sequence.h"
 #include "parlay/primitives.h"
 
-#include "kdtree/shared/geometry.h"
+#include "batchKdtree/shared/geometry.h"
 #include "common/geometryIO.h"
 
-#include "../include/kdtree/shared/utils.h"
-#include "../include/kdtree/shared/macro.h"
+#include "../include/batchKdtree/shared/utils.h"
+#include "../include/batchKdtree/shared/macro.h"
 
 void testScan() {
   parlay::sequence<int> p;

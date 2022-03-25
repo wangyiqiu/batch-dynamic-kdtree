@@ -1,10 +1,32 @@
-#ifndef KDTREE_SHARED_KNNBUFFER_H
-#define KDTREE_SHARED_KNNBUFFER_H
+// This code is part of the project "Parallel Batch-Dynamic Kd-Trees"
+// Copyright (c) 2021-2022 Rahul Yesantharao, Yiqiu Wang, Laxman Dhulipala, Julian Shun
+//
+// MIT License
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+#pragma once
 
 // TAKEN with slight modifications FROM
 // https://github.mit.edu/yiqiuw/pargeo/blob/master/knnSearch/kdTree/kdtKnn.h Later, need to merge +
 // refer to that rather than copying here
-#include <kdtree/shared/geometry.h>
+#include <batchKdtree/shared/geometry.h>
 namespace knnBuf {
 
 typedef int intT;
@@ -84,5 +106,3 @@ parlay::sequence<const point<dim>*> bruteforceKnn(const parlay::sequence<point<d
 }
 
 }  // namespace knnBuf
-
-#endif  //  KDTREE_SHARED_KNNBUFFER_H
