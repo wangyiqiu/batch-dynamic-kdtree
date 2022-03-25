@@ -31,6 +31,8 @@
 
 #include "macro.h"
 
+namespace batchKdTree {
+
 #ifdef DEBUG
 #define DEBUG_MSG(str)             \
   do {                             \
@@ -236,3 +238,5 @@ double serialSpatialPartition(parlay::slice<objT *, objT *> items,
   //}
   return imed;
 }
+
+} // End namespace batchKdTree

@@ -9,6 +9,8 @@
 #include <batchKdtree/shared/box.h>
 #include <batchKdtree/shared/dual.h>
 
+using namespace batchKdTree;
+
 typedef point<2> pointT;
 template <typename Tree>
 class QueryTest : public BasicStructure2D<Tree> {

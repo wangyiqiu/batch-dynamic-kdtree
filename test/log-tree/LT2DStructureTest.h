@@ -6,6 +6,8 @@
 
 #include <batchKdtree/log-tree/logtree.h>
 
+using namespace batchKdTree;
+
 typedef point<2> pointT;
 pointT constructPoint(double d) {
   constexpr int dim = 2;

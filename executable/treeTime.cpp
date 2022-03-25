@@ -34,6 +34,7 @@
 #include "batchKdtree/shared/dual.h"
 
 using namespace benchIO;
+using namespace batchKdTree;
 
 using coord = double;
 

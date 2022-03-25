@@ -32,6 +32,8 @@
 
 #include "../shared/macro.h"
 
+namespace batchKdTree {
+
 inline bool buildInParallel(size_t num_points) { return num_points >= BHL_BUILD_BASE_CASE; }
 
 // Dynamic (insert + delete) kd-tree with binary-heap layout
@@ -288,3 +290,5 @@ class BHL_KdTree : public KdTree<dim, objT, parallel, coarsen> {
     }
   }
 };
+
+} // End namespace batchKdTree

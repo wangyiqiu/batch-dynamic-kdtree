@@ -6,6 +6,8 @@
 
 #include <batchKdtree/log-tree/logtree.h>
 
+using namespace batchKdTree;
+
 class Bulk {
  public:
   static constexpr bool bulk = true;

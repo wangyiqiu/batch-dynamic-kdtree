@@ -4,6 +4,8 @@
 #include <gtest/gtest.h>
 #include "common/geometryIO.h"
 
+using namespace batchKdTree;
+
 template <class T>
 static auto KEEP_EVEN(const parlay::sequence<T>& seq) {
   // construct the points to delete

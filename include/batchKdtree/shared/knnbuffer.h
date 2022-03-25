@@ -26,8 +26,8 @@
 // TAKEN with slight modifications FROM
 // https://github.mit.edu/yiqiuw/pargeo/blob/master/knnSearch/kdTree/kdtKnn.h Later, need to merge +
 // refer to that rather than copying here
-#include <batchKdtree/shared/geometry.h>
-namespace knnBuf {
+#include "batchKdtree/shared/geometry.h"
+namespace batchKdTree::knnBuf {
 
 typedef int intT;
 typedef double floatT;
@@ -105,4 +105,4 @@ parlay::sequence<const point<dim>*> bruteforceKnn(const parlay::sequence<point<d
   return idx;
 }
 
-}  // namespace knnBuf
+}  // namespace batchKdTree::knnBuf

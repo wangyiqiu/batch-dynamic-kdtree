@@ -32,6 +32,8 @@
 #include "knnbuffer.h"
 #include "box.h"
 
+namespace batchKdTree {
+
 template <int dim, class objT, bool parallel, bool coarsen>
 class KdTree;
 
@@ -539,3 +541,5 @@ class Auxiliary {
   Auxiliary(parlay::sequence<objT *> items_)
       : items(std::move(items_)) {}  // create internal copy of items
 };
+
+} // End namespace batchKdTree

@@ -6,6 +6,9 @@
 #include <iomanip>
 #include "parlay/parallel.h"
 #include "parlay/primitives.h"
+
+namespace batchKdTree {
+
 using namespace std;
 
 // *************************************************************
@@ -462,3 +465,4 @@ static std::ostream& operator<<(std::ostream& os, const point<dim> v) {
 //   return a + vector2d<coord>(v22.y - v11.y, v11.x - v22.x)/(2.0 * v1.cross(v2));
 // }
 
+} // End namespace batchKdTree

@@ -7,6 +7,8 @@
 #include "../shared/QueryTest.h"
 #include "BHL2DStructureTest.h"
 
+using namespace batchKdTree;
+
 static constexpr int dim = 2;
 // <dim, objT, parallel, false>
 

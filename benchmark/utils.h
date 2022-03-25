@@ -1,8 +1,9 @@
-#ifndef BENCHMARK_UTILS_H
-#define BENCHMARK_UTILS_H
+#pragma once
 
 #include "parlay/random.h"
 #include <random>
+
+using namespace batchKdTree;
 
 // --- Taken from parlaylib ---
 // Use this macro to avoid accidentally timing the destructors
@@ -240,5 +241,3 @@ constexpr int NUM_TREES = 21;
 constexpr int BUFFER_LOG2_SIZE = 10;
 template <int dim>
 using LogTree_t = LogTree<NUM_TREES, BUFFER_LOG2_SIZE, dim, point<dim>, parallel, coarsen>;
-
-#endif  // BENCHMARK_UTILS_H

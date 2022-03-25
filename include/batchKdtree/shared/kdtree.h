@@ -40,6 +40,8 @@
 #include "common/get_time.h"
 #endif
 
+namespace batchKdTree {
+
 // TODO: refactor so that there's static methods for checking if this is empty, constructing empty
 // struct
 // TODO: refactor this into an opaque substruct of KdTree, so that it can't be inspected outside
@@ -816,3 +818,5 @@ class KdTree {
   }
   void print() const { print(std::string(""), nodes, false); }
 };
+
+} // End namespace batchKdTree

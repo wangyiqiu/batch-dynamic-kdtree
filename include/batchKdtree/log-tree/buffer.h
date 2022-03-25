@@ -28,6 +28,8 @@
 
 #include "../shared/macro.h"
 
+namespace batchKdTree {
+
 template <int dim, class objT, bool parallel = false>
 class alignas(64) LogTreeBuffer {
   typedef point<dim> pointT;
@@ -222,3 +224,5 @@ class alignas(64) LogTreeBuffer {
     }
   }
 };
+
+} // End namespace batchKdTree

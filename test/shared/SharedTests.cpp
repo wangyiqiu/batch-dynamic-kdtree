@@ -5,6 +5,8 @@
 #include "batchKdtree/shared/bloom.h"
 #include "BasicStructure.h"
 
+using namespace batchKdTree;
+
 class SharedTests : public ::testing::Test {};
 
 TEST_F(SharedTests, BoundingBoxDistance) {

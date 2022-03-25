@@ -23,6 +23,8 @@
 
 #pragma once
 
+namespace batchKdTree {
+
 //#define PRINT_CONFIG
 //#define PRINT_LOGTREE_TIMINGS
 //#define PRINT_DKNN_TIMINGS
@@ -110,3 +112,5 @@ void print_config() {
 #else
 void print_config() {}
 #endif
+
+} // End namespace batchKdTree

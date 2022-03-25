@@ -28,6 +28,8 @@
 #include "parlay/primitives.h"
 #include "../shared/utils.h"
 
+namespace batchKdTree {
+
 void funnelSort() {
   // TODO: cache-oblivious sorting
 }
@@ -178,3 +180,5 @@ void initialize(__attribute__((unused)) int num_levels) {
     initialized = true;
   }
 }
+
+} // End namespace batchKdTree

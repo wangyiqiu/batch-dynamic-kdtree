@@ -7,6 +7,8 @@
 #include "../shared/Shared2DTest.h"
 #include "../shared/QueryTest.h"
 
+using namespace batchKdTree;
+
 static constexpr int dim = 2;
 // <dim, objT, parallel, false>
 

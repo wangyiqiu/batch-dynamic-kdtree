@@ -30,6 +30,8 @@
 #include "common/get_time.h"
 #endif
 
+namespace batchKdTree {
+
 // Top-level wrappers for calling dual knn
 template <int dim, class objT, bool parallel, bool coarsen>
 parlay::sequence<const point<dim> *> dualKnn(parlay::sequence<objT> &queries,
@@ -230,3 +232,5 @@ void DualKnnHelper(kdNode<dim, objT, parallel> *Q,
 #endif
   }
 }
+
+} // End namespace batchKdTree

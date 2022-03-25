@@ -11,6 +11,8 @@
 #include "../include/batchKdtree/shared/utils.h"
 #include "../include/batchKdtree/shared/macro.h"
 
+using namespace batchKdTree;
+
 void testScan() {
   parlay::sequence<int> p;
   for (int i = 0; i < 10; i++)

@@ -36,6 +36,8 @@
 #include "../shared/bloom.h"
 #endif
 
+namespace batchKdTree {
+
 /*#define DEBUG_MSG(str)             \
   do {                             \
     std::cout << str << std::endl; \
@@ -1196,3 +1198,5 @@ class LogTree {
     static_trees[tree_idx].print();
   }
 };
+
+} // End namespace batchKdTree

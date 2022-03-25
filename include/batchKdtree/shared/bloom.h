@@ -29,6 +29,8 @@
 #include <parlay/sequence.h>
 #include <xxHash/xxhash.h>
 
+namespace batchKdTree {
+
 #define ATOMIC_BUCKETS
 //#define BIT_VECTOR
 
@@ -162,3 +164,5 @@ class BloomFilter {
     return parlay::filter(points, [this](const point<dim> &p) { return this->might_contain(p); });
   }
 };
+
+} // End namespace batchKdTree

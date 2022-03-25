@@ -40,6 +40,8 @@
 #include "common/get_time.h"
 #endif
 
+namespace batchKdTree {
+
 // Static Cache-Oblivious Tree
 // TODO: add deletes
 template <int dim, class objT, bool parallel = false, bool coarsen = false>
@@ -518,3 +520,5 @@ class CO_KdTree : public KdTree<dim, objT, parallel, coarsen> {
     }
   }
 };
+
+} // End namespace batchKdTree

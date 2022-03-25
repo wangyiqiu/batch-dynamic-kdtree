@@ -23,6 +23,8 @@
 
 #pragma once
 
+namespace batchKdTree {
+
 // TODO: refactor this file into a class after [point] has a move constructor, copy constructor
 
 enum BoxComparison { BOX_INCLUDE = 0, BOX_OVERLAP, BOX_EXCLUDE };
@@ -153,3 +155,5 @@ class Box {
     return itemInBox<dim, objT>(pMin, pMax, o);
   }
 };
+
+} // End namespace batchKdTree

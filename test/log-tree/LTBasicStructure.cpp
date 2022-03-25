@@ -7,6 +7,8 @@
 #include "LT2DDeleteTest.h"
 #include "../shared/QueryTest.h"
 
+using namespace batchKdTree;
+
 static constexpr int dim = 2;
 static constexpr int NUM_TREES = 14;
 static constexpr int BUFFER_LOG2_SIZE = 3;
