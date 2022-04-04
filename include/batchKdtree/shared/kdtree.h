@@ -32,6 +32,8 @@
 #include "box.h"
 #include "macro.h"
 
+#include "mortonSort/mortonSort.h"
+
 #ifdef ALL_USE_BLOOM
 #include "bloom.h"
 #endif
@@ -329,6 +331,21 @@ class KdTree {
       const {
     assert(bufs.size() == queries.size());
 
+#if SPATIAL_SORT == 2
+  timer t; t.start();
+#endif
+#if SPATIAL_SORT > 0
+    if (objT::dim == 2) {
+      pargeo::zorderSort2d_2<objT>(queries);
+    }
+    else if (objT::dim == 3) {
+      pargeo::zorderSort3d_2<objT>(queries);
+    }
+#endif
+#if SPATIAL_SORT == 2
+  std::cout << "spatial-sort-time-1 = " << t.stop() << "\n";
+#endif
+
     if (parallel) {
       parlay::parallel_for(0, queries.size(), [&](size_t i) {
         knnSinglePoint<update, recurse_sibling>(queries[i], bufs[i]);
@@ -347,6 +364,21 @@ class KdTree {
            bool preload = false) const {
     assert(res.size() == k * queries.size());
     assert(out.size() == 2 * k * queries.size());
+
+#if SPATIAL_SORT == 2
+  timer t; t.start();
+#endif
+#if SPATIAL_SORT > 0
+    if (objT::dim == 2) {
+      pargeo::zorderSort2d_2<objT>(queries);
+    }
+    else if (objT::dim == 3) {
+      pargeo::zorderSort3d_2<objT>(queries);
+    }
+#endif
+#if SPATIAL_SORT == 2
+  std::cout << "spatial-sort-time-2 = " << t.stop() << "\n";
+#endif
 
     if (parallel) {
       parlay::parallel_for(0, queries.size(), [&](size_t i) {

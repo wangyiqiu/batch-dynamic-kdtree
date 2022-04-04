@@ -24,7 +24,7 @@
 #pragma once
 
 #define XXH_PRIVATE_API
-#include <batchKdtree/shared/geometry.h>
+#include <common/geometry.h>
 #include <parlay/parallel.h>
 #include <parlay/sequence.h>
 #include <xxHash/xxhash.h>

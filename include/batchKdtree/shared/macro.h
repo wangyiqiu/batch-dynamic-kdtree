@@ -60,6 +60,10 @@ namespace batchKdTree {
 #define ARR_BUFFER 1
 #define LOGTREE_BUFFER BHL_BUFFER
 
+// KNN OPTIMIZATION
+#define FEWER_SQRT 0
+#define SPATIAL_SORT 0
+
 // LEAF CLUSTER SIZE
 #ifndef CLUSTER_SIZE
 #define CLUSTER_SIZE 16

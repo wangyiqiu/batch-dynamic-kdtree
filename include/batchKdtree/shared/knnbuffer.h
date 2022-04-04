@@ -26,7 +26,7 @@
 // TAKEN with slight modifications FROM
 // https://github.mit.edu/yiqiuw/pargeo/blob/master/knnSearch/kdTree/kdtKnn.h Later, need to merge +
 // refer to that rather than copying here
-#include "batchKdtree/shared/geometry.h"
+#include "common/geometry.h"
 namespace batchKdTree::knnBuf {
 
 typedef int intT;
