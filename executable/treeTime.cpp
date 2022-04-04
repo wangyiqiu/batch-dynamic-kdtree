@@ -25,15 +25,15 @@
 #include "parlay/parallel.h"
 #include "common/get_time.h"
 #include "common/geometry.h"
-#include "common/geometryIO.h"
 #include "common/parse_command_line.h"
+
+#include "pargeo/pointIO.h"
 
 #include "batchKdtree/cache-oblivious/cokdtree.h"
 #include "batchKdtree/binary-heap-layout/bhlkdtree.h"
 #include "batchKdtree/log-tree/logtree.h"
 #include "batchKdtree/shared/dual.h"
 
-using namespace benchIO;
 using namespace batchKdTree;
 
 using coord = double;
@@ -422,7 +422,7 @@ void timeTrees(parlay::sequence<point<dim>>& P, const TestOptions& test_options)
 
 template <int dim>
 inline void runTests(const char* iFile, const TestOptions& test_options) {
-  parlay::sequence<point<dim>> Points = readPointsFromFile<point<dim>>(iFile);
+  parlay::sequence<point<dim>> Points = pargeo::pointIO::readPointsFromFile<point<dim>>(iFile);
   std::cout << "Timing " << test_options.type << " (dim = " << dim
             << ", #points = " << Points.size()
             << ((is_knn(test_options.type)) ? (", k=" + std::to_string(test_options.k)) : "") << ")"
@@ -504,7 +504,7 @@ int main(int argc, char* argv[]) {
   char* iFile = P.getArgument(0);
   auto test_options = parseCmdLine(P);
 
-  int dim = readDimensionFromFile(iFile);  // todo make cheaper
+  int dim = pargeo::pointIO::readDimensionFromFile(iFile);  // todo make cheaper
   if (dim == 2) {
     runTests<2>(iFile, test_options);
   } else if (dim == 3) {
