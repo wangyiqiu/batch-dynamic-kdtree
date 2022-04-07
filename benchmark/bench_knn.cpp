@@ -40,7 +40,7 @@ static void bench_knn(benchmark::State& state) {
   auto size = state.range(0);
   auto k = state.range(1);
   DSType ds_type = (DSType)state.range(2);
-  parlay::sequence<point<dim>> points;
+  parlay::sequence<batchKdTree::point<dim>> points;
   points = BenchmarkDS<dim>(size, ds_type);
   Tree tree(points);
 
@@ -57,7 +57,7 @@ static void bench_knn2(benchmark::State& state) {
   auto size = state.range(0);
   auto k = state.range(1);
   DSType ds_type = (DSType)state.range(2);
-  parlay::sequence<point<dim>> points;
+  parlay::sequence<batchKdTree::point<dim>> points;
   points = BenchmarkDS<dim>(size, ds_type);
   Tree tree(points);
 
@@ -74,7 +74,7 @@ static void bench_knn3(benchmark::State& state) {
   auto size = state.range(0);
   auto k = state.range(1);
   DSType ds_type = (DSType)state.range(2);
-  parlay::sequence<point<dim>> points;
+  parlay::sequence<batchKdTree::point<dim>> points;
   points = BenchmarkDS<dim>(size, ds_type);
   Tree tree(points);
 
@@ -90,7 +90,7 @@ static void bench_dual_knn(benchmark::State& state) {
   auto size = state.range(0);
   auto k = state.range(1);
   DSType ds_type = (DSType)state.range(2);
-  parlay::sequence<point<dim>> points;
+  parlay::sequence<batchKdTree::point<dim>> points;
   points = BenchmarkDS<dim>(size, ds_type);
   Tree tree(points);
 
@@ -104,125 +104,98 @@ static void bench_dual_knn(benchmark::State& state) {
 BENCH(knn, 2, COTree_t<2>, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 BENCH(knn, 2, BHLTree_t<2>, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 BENCH(knn, 2, LogTree_t<2>, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 BENCH(knn2, 2, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 BENCH(knn3, 2, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 BENCH(dual_knn, 2, COTree_t<2>)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 BENCH(dual_knn, 2, BHLTree_t<2>)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 BENCH(dual_knn, 2, LogTree_t<2>)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
-
-BENCH(knn, 3, COTree_t<3>, 0)
-    ->ArgsProduct({{10'000'000}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, {DS_GEO_LIFE}});
-BENCH(knn, 3, BHLTree_t<3>, 0)
-    ->ArgsProduct({{10'000'000}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, {DS_GEO_LIFE}});
-BENCH(knn, 3, LogTree_t<3>, 0)
-    ->ArgsProduct({{10'000'000}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, {DS_GEO_LIFE}});
-BENCH(knn2, 3, 0)->ArgsProduct({{10'000'000}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, {DS_GEO_LIFE}});
-BENCH(knn3, 3, 0)->ArgsProduct({{10'000'000}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, {DS_GEO_LIFE}});
-BENCH(dual_knn, 3, COTree_t<3>)
-    ->ArgsProduct({{10'000'000}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, {DS_GEO_LIFE}});
-BENCH(dual_knn, 3, BHLTree_t<3>)
-    ->ArgsProduct({{10'000'000}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, {DS_GEO_LIFE}});
-BENCH(dual_knn, 3, LogTree_t<3>)
-    ->ArgsProduct({{10'000'000}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, {DS_GEO_LIFE}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 
 BENCH(knn, 5, COTree_t<5>, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL}});
 BENCH(knn, 5, BHLTree_t<5>, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL}});
 BENCH(knn, 5, LogTree_t<5>, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL}});
 BENCH(knn2, 5, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL}});
 BENCH(knn3, 5, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL}});
 BENCH(dual_knn, 5, COTree_t<5>)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL}});
 BENCH(dual_knn, 5, BHLTree_t<5>)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL}});
 BENCH(dual_knn, 5, LogTree_t<5>)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL}});
 
 BENCH(knn, 7, COTree_t<7>, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+                   {DS_UNIFORM_FILL}});
 BENCH(knn, 7, BHLTree_t<7>, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+                   {DS_UNIFORM_FILL}});
 BENCH(knn, 7, LogTree_t<7>, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+                   {DS_UNIFORM_FILL}});
 BENCH(knn2, 7, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+                   {DS_UNIFORM_FILL}});
 BENCH(knn3, 7, 0)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+                   {DS_UNIFORM_FILL}});
 BENCH(dual_knn, 7, COTree_t<7>)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+                   {DS_UNIFORM_FILL}});
 BENCH(dual_knn, 7, BHLTree_t<7>)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+                   {DS_UNIFORM_FILL}});
 BENCH(dual_knn, 7, LogTree_t<7>)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
-
-BENCH(knn, 10, COTree_t<10>, 0)
-    ->ArgsProduct({{10'000'000}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, {DS_HT}});
-BENCH(knn, 10, BHLTree_t<10>, 0)
-    ->ArgsProduct({{10'000'000}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, {DS_HT}});
-BENCH(knn3, 10, 0)->ArgsProduct({{10'000'000}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, {DS_HT}});
-
-BENCH(knn, 16, COTree_t<16>, 0)
-    ->ArgsProduct({{10'000'000}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, {DS_CHEM}});
-BENCH(knn, 16, BHLTree_t<16>, 0)
-    ->ArgsProduct({{10'000'000}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, {DS_CHEM}});
-BENCH(knn3, 16, 0)->ArgsProduct({{10'000'000}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}, {DS_CHEM}});
+                   {DS_UNIFORM_FILL}});

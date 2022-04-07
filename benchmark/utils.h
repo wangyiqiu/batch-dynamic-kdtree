@@ -1,9 +1,11 @@
 #pragma once
 
+#include "dataset/uniform.h"
 #include "parlay/random.h"
+#include "parlay/sequence.h"
 #include <random>
 
-using namespace batchKdTree;
+//using namespace batchKdTree;
 
 // --- Taken from parlaylib ---
 // Use this macro to avoid accidentally timing the destructors
@@ -25,7 +27,7 @@ using namespace batchKdTree;
 
 // --- Data loading ---
 template <int dim>
-void AddNoise(parlay::sequence<point<dim>>& points) {
+void AddNoise(parlay::sequence<batchKdTree::point<dim>>& points) {
   std::default_random_engine generator;
   std::uniform_real_distribution<double> distribution(0.0, 1e-6);
 
@@ -40,30 +42,87 @@ template <int dim, bool add_noise = false>
 auto LoadFile(const char* filePath) {
   [[maybe_unused]] auto read_dim = readDimensionFromFile(filePath);
   assert(read_dim == dim);
-  auto ret = readPointsFromFile<point<dim>>(filePath);
+  auto ret = readPointsFromFile<batchKdTree::point<dim>>(filePath);
   if (add_noise) AddNoise<dim>(ret);
   return ret;
 }
 
-auto UniformSphere2D_1K() { return LoadFile<2>("datasets/2d-UniformInSphere-1k.pbbs"); }
-auto UniformSphere2D_10K() { return LoadFile<2>("datasets/2d-UniformInSphere-10K.pbbs"); }
-auto UniformSphere2D_1M() { return LoadFile<2>("datasets/2d-UniformInSphere-1M.pbbs"); }
-auto UniformSphere2D_10M() { return LoadFile<2>("datasets/2d-UniformInSphere-10M.pbbs"); }
-auto VisualVar5D_100K() { return LoadFile<5>("datasets/5D_VisualVar_100K.pbbs"); }
-auto VisualVar5D_1M() { return LoadFile<5>("datasets/5D_VisualVar_1M.pbbs"); }
+// Global declaration of data set fields
+
+parlay::sequence<batchKdTree::point<2>> us2d_1k;
+parlay::sequence<batchKdTree::point<2>> us2d_10k;
+parlay::sequence<batchKdTree::point<2>> us2d_1m;
+parlay::sequence<batchKdTree::point<2>> us2d_10m;
+
+auto UniformSphere2D_1K() {
+  if (us2d_1k.size() == 0)
+    us2d_1k = pargeo::uniformInPolyPoints<2, batchKdTree::point<2>>(1000, 0);
+  return us2d_1k;
+}
+auto UniformSphere2D_10K() {
+  if (us2d_10k.size() == 0)
+    us2d_10k = pargeo::uniformInPolyPoints<2, batchKdTree::point<2>>(10000, 0);
+  return us2d_10k;
+}
+auto UniformSphere2D_1M() {
+  if (us2d_1m.size() == 0)
+    us2d_1m = pargeo::uniformInPolyPoints<2, batchKdTree::point<2>>(1000000, 0);
+  return us2d_1m;
+}
+auto UniformSphere2D_10M() {
+  if (us2d_10m.size() == 0)
+    us2d_10m = pargeo::uniformInPolyPoints<2, batchKdTree::point<2>>(10000000, 0);
+  return us2d_10m;
+}
+auto VisualVar5D_100K() { 
+  throw std::runtime_error("VisualVar5D_100K not available");
+  return LoadFile<5>("datasets/5D_VisualVar_100K.pbbs"); }
+auto VisualVar5D_1M() {
+  throw std::runtime_error("VisualVar5D_1M not available");
+  return LoadFile<5>("datasets/5D_VisualVar_1M.pbbs"); }
 
 // Benchmark Datasets
 
-auto UniformFill2D_10M() { return LoadFile<2>("datasets/2D_UniformFill_10M.pbbs"); }
-auto UniformFill5D_10M() { return LoadFile<5>("datasets/5D_UniformFill_10M.pbbs"); }
-auto UniformFill7D_10M() { return LoadFile<7>("datasets/7D_UniformFill_10M.pbbs"); }
-auto VisualVar2D_10M() { return LoadFile<2, true>("datasets/2D_VisualVar_10M.pbbs"); }
-auto VisualVar5D_10M() { return LoadFile<5, true>("datasets/5D_VisualVar_10M.pbbs"); }
-auto VisualVar7D_10M() { return LoadFile<7, true>("datasets/7D_VisualVar_10M.pbbs"); }
-auto GeoLife3D_24M() { return LoadFile<3, true>("datasets/3D_GeoLife_24M.pbbs"); }
-auto HouseHold7D_2M() { return LoadFile<7, true>("datasets/7D_HouseHold_2M.pbbs"); }
-auto HT10D_1M() { return LoadFile<10, true>("datasets/HT.pbbs"); }
-auto CHEM16D_4M() { return LoadFile<16, true>("datasets/CHEM.pbbs"); }
+parlay::sequence<batchKdTree::point<2>> uf2d_10m;
+parlay::sequence<batchKdTree::point<5>> uf5d_10m;
+parlay::sequence<batchKdTree::point<7>> uf7d_10m;
+
+auto UniformFill2D_10M() {
+  if (uf2d_10m.size() == 0)
+    uf2d_10m = pargeo::uniformInPolyPoints<2, batchKdTree::point<2>>(10000000, 1);
+  return uf2d_10m;
+}
+auto UniformFill5D_10M() {
+  if (uf5d_10m.size() == 0)
+    uf5d_10m = pargeo::uniformInPolyPoints<5, batchKdTree::point<5>>(10000000, 1);
+  return uf5d_10m;
+}
+auto UniformFill7D_10M() {
+  if (uf7d_10m.size() == 0)
+    uf7d_10m = pargeo::uniformInPolyPoints<7, batchKdTree::point<7>>(10000000, 1);
+  return uf7d_10m;
+}
+auto VisualVar2D_10M() {
+  throw std::runtime_error("VisualVar2D_10M not available");
+  return LoadFile<2, true>("datasets/2D_VisualVar_10M.pbbs"); }
+auto VisualVar5D_10M() {
+  throw std::runtime_error("VisualVar5D_10M not available");
+  return LoadFile<5, true>("datasets/5D_VisualVar_10M.pbbs"); }
+auto VisualVar7D_10M() {
+  throw std::runtime_error("VisualVar7D_10M not available");
+  return LoadFile<7, true>("datasets/7D_VisualVar_10M.pbbs"); }
+auto GeoLife3D_24M() {
+  throw std::runtime_error("GeoLife3D_24M not available");
+  return LoadFile<3, true>("datasets/3D_GeoLife_24M.pbbs"); }
+auto HouseHold7D_2M() {
+  throw std::runtime_error("HouseHold7D_2M not available");
+  return LoadFile<7, true>("datasets/7D_HouseHold_2M.pbbs"); }
+auto HT10D_1M() {
+  throw std::runtime_error("HT10D_1M not available");
+  return LoadFile<10, true>("datasets/HT.pbbs"); }
+auto CHEM16D_4M() {
+  throw std::runtime_error("CHEM16D_4M not available");
+  return LoadFile<16, true>("datasets/CHEM.pbbs"); }
 
 enum DSType {
   DS_UNIFORM_FILL,    // 0
@@ -85,7 +144,7 @@ auto BenchmarkDS(__attribute__((unused)) int size,
 
 template <>
 auto BenchmarkDS<2>(int size, DSType ds_type, bool shuffle) {
-  parlay::sequence<point<2>> ret;
+  parlay::sequence<batchKdTree::point<2>> ret;
   switch (ds_type) {
     case DS_UNIFORM_FILL: {
       ret = UniformFill2D_10M();
@@ -120,7 +179,7 @@ auto BenchmarkDS<2>(int size, DSType ds_type, bool shuffle) {
 
 template <>
 auto BenchmarkDS<3>(__attribute__((unused)) int size, DSType ds_type, bool shuffle) {
-  parlay::sequence<point<3>> ret;
+  parlay::sequence<batchKdTree::point<3>> ret;
   switch (ds_type) {
     case DS_GEO_LIFE: {
       ret = GeoLife3D_24M();
@@ -138,7 +197,7 @@ auto BenchmarkDS<3>(__attribute__((unused)) int size, DSType ds_type, bool shuff
 
 template <>
 auto BenchmarkDS<5>(int size, DSType ds_type, bool shuffle) {
-  parlay::sequence<point<5>> ret;
+  parlay::sequence<batchKdTree::point<5>> ret;
   switch (ds_type) {
     case DS_UNIFORM_FILL: {
       ret = UniformFill5D_10M();
@@ -167,7 +226,7 @@ auto BenchmarkDS<5>(int size, DSType ds_type, bool shuffle) {
 
 template <>
 auto BenchmarkDS<7>(__attribute__((unused)) int size, DSType ds_type, bool shuffle) {
-  parlay::sequence<point<7>> ret;
+  parlay::sequence<batchKdTree::point<7>> ret;
   switch (ds_type) {
     case DS_UNIFORM_FILL: {
       ret = UniformFill7D_10M();
@@ -193,7 +252,7 @@ auto BenchmarkDS<7>(__attribute__((unused)) int size, DSType ds_type, bool shuff
 
 template <>
 auto BenchmarkDS<10>(__attribute__((unused)) int size, DSType ds_type, bool shuffle) {
-  parlay::sequence<point<10>> ret;
+  parlay::sequence<batchKdTree::point<10>> ret;
   switch (ds_type) {
     case DS_HT: {
       ret = HT10D_1M();
@@ -211,7 +270,7 @@ auto BenchmarkDS<10>(__attribute__((unused)) int size, DSType ds_type, bool shuf
 
 template <>
 auto BenchmarkDS<16>(__attribute__((unused)) int size, DSType ds_type, bool shuffle) {
-  parlay::sequence<point<16>> ret;
+  parlay::sequence<batchKdTree::point<16>> ret;
   switch (ds_type) {
     case DS_CHEM: {
       ret = CHEM16D_4M();
@@ -232,12 +291,12 @@ constexpr bool parallel = true;
 constexpr bool coarsen = true;
 
 template <int dim>
-using COTree_t = CO_KdTree<dim, point<dim>, parallel, coarsen>;
+using COTree_t = batchKdTree::CO_KdTree<dim, batchKdTree::point<dim>, parallel, coarsen>;
 
 template <int dim>
-using BHLTree_t = BHL_KdTree<dim, point<dim>, parallel, coarsen>;
+using BHLTree_t = batchKdTree::BHL_KdTree<dim, batchKdTree::point<dim>, parallel, coarsen>;
 
 constexpr int NUM_TREES = 21;
 constexpr int BUFFER_LOG2_SIZE = 10;
 template <int dim>
-using LogTree_t = LogTree<NUM_TREES, BUFFER_LOG2_SIZE, dim, point<dim>, parallel, coarsen>;
+using LogTree_t = batchKdTree::LogTree<NUM_TREES, BUFFER_LOG2_SIZE, dim, batchKdTree::point<dim>, parallel, coarsen>;

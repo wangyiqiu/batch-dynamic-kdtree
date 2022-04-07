@@ -41,34 +41,22 @@ static void bench_construction(benchmark::State& state) {
 
 // Instantiate benchmarks
 BENCH(construction, 2, COTree_t<2>)
-    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 BENCH(construction, 2, BHLTree_t<2>)
-    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 BENCH(construction, 2, LogTree_t<2>)
-    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
-
-BENCH(construction, 3, COTree_t<3>)->ArgsProduct({{10'000'000}, {100, 50}, {DS_GEO_LIFE}});
-BENCH(construction, 3, BHLTree_t<3>)->ArgsProduct({{10'000'000}, {100, 50}, {DS_GEO_LIFE}});
-BENCH(construction, 3, LogTree_t<3>)->ArgsProduct({{10'000'000}, {100, 50}, {DS_GEO_LIFE}});
+    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 
 BENCH(construction, 5, COTree_t<5>)
-    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL}});
 BENCH(construction, 5, BHLTree_t<5>)
-    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL}});
 BENCH(construction, 5, LogTree_t<5>)
-    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL}});
 
 BENCH(construction, 7, COTree_t<7>)
-    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL}});
 BENCH(construction, 7, BHLTree_t<7>)
-    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL}});
 BENCH(construction, 7, LogTree_t<7>)
-    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
-
-BENCH(construction, 10, COTree_t<10>)->ArgsProduct({{10'000'000}, {100}, {DS_HT}});
-BENCH(construction, 10, BHLTree_t<10>)->ArgsProduct({{10'000'000}, {100}, {DS_HT}});
-BENCH(construction, 10, LogTree_t<10>)->ArgsProduct({{10'000'000}, {100}, {DS_HT}});
-
-BENCH(construction, 16, COTree_t<16>)->ArgsProduct({{10'000'000}, {100}, {DS_CHEM}});
-BENCH(construction, 16, BHLTree_t<16>)->ArgsProduct({{10'000'000}, {100}, {DS_CHEM}});
-BENCH(construction, 16, LogTree_t<16>)->ArgsProduct({{10'000'000}, {100}, {DS_CHEM}});
+    ->ArgsProduct({{10'000'000}, {100, 50}, {DS_UNIFORM_FILL}});

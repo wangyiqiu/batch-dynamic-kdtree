@@ -56,77 +56,38 @@ static void bench_insert(benchmark::State& state) {
 BENCH(insert, 2, COTree_t<2>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 BENCH(insert, 2, BHLTree_t<2>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 BENCH(insert, 2, LogTree_t<2>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
-
-BENCH(insert, 3, COTree_t<3>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_GEO_LIFE}});
-BENCH(insert, 3, BHLTree_t<3>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_GEO_LIFE}});
-BENCH(insert, 3, LogTree_t<3>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_GEO_LIFE}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 
 BENCH(insert, 5, COTree_t<5>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL}});
 BENCH(insert, 5, BHLTree_t<5>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL}});
 BENCH(insert, 5, LogTree_t<5>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL}});
 
 BENCH(insert, 7, COTree_t<7>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+                   {DS_UNIFORM_FILL}});
 BENCH(insert, 7, BHLTree_t<7>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+                   {DS_UNIFORM_FILL}});
 BENCH(insert, 7, LogTree_t<7>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
-
-BENCH(insert, 10, COTree_t<10>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_HT}});
-BENCH(insert, 10, BHLTree_t<10>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_HT}});
-BENCH(insert, 10, LogTree_t<10>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_HT}});
-
-BENCH(insert, 16, COTree_t<16>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_CHEM}});
-BENCH(insert, 16, BHLTree_t<16>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_CHEM}});
-BENCH(insert, 16, LogTree_t<16>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_CHEM}});
+                   {DS_UNIFORM_FILL}});

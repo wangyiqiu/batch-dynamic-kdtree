@@ -26,17 +26,17 @@ static void bench_delete_(benchmark::State& state) {
   auto percentage = state.range(1);
   DSType ds_type = (DSType)state.range(2);
 
-  parlay::sequence<point<dim>> points;
+  parlay::sequence<batchKdTree::point<dim>> points;
   points = BenchmarkDS<dim>(size, ds_type);
 
   // generate (deterministic) random sample to delete
   int del_size = (points.size() * percentage) / 100;
   auto to_delete = random_shuffle(points);  // random shuffle
-  std::vector<parlay::sequence<point<dim>>> del_arr;
+  std::vector<parlay::sequence<batchKdTree::point<dim>>> del_arr;
   size_t pos = 0;
   while (pos < points.size()) {
     auto next_pos = std::min(pos + del_size, points.size());
-    parlay::sequence<point<dim>> pts;
+    parlay::sequence<batchKdTree::point<dim>> pts;
     pts.assign(to_delete.cut(pos, next_pos));
     del_arr.push_back(std::move(pts));
     pos = next_pos;
@@ -63,77 +63,38 @@ static void bench_delete_(benchmark::State& state) {
 BENCH(delete_, 2, COTree_t<2>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 BENCH(delete_, 2, BHLTree_t<2>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 BENCH(delete_, 2, LogTree_t<2>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
-
-BENCH(delete_, 3, COTree_t<3>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_GEO_LIFE}});
-BENCH(delete_, 3, BHLTree_t<3>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_GEO_LIFE}});
-BENCH(delete_, 3, LogTree_t<3>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_GEO_LIFE}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 
 BENCH(delete_, 5, COTree_t<5>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL}});
 BENCH(delete_, 5, BHLTree_t<5>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL}});
 BENCH(delete_, 5, LogTree_t<5>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL}});
 
 BENCH(delete_, 7, COTree_t<7>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+                   {DS_UNIFORM_FILL}});
 BENCH(delete_, 7, BHLTree_t<7>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+                   {DS_UNIFORM_FILL}});
 BENCH(delete_, 7, LogTree_t<7>)
     ->ArgsProduct({{10'000'000},
                    {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
-
-BENCH(delete_, 10, COTree_t<10>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_HT}});
-BENCH(delete_, 10, BHLTree_t<10>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_HT}});
-BENCH(delete_, 10, LogTree_t<10>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_HT}});
-
-BENCH(delete_, 16, COTree_t<16>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_CHEM}});
-BENCH(delete_, 16, BHLTree_t<16>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_CHEM}});
-BENCH(delete_, 16, LogTree_t<16>)
-    ->ArgsProduct({{10'000'000},
-                   {10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
-                   {DS_CHEM}});
+                   {DS_UNIFORM_FILL}});

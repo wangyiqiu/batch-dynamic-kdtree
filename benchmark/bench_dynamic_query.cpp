@@ -39,12 +39,12 @@ static void bench_dynamic_query(benchmark::State& state) {
   constexpr size_t sub_division = 4;
   auto del_points = random_shuffle(points);
 #ifdef SMALL_BATCH_DELETE
-  std::vector<parlay::sequence<point<dim>>> del_arr[sub_division];
+  std::vector<parlay::sequence<batchKdTree::point<dim>>> del_arr[sub_division];
   size_t del_pos = 0;
   for (size_t sd = 1; sd < sub_division; sd++) {
     while (del_pos < (points.size() * sd) / sub_division) {
       auto next_pos = std::min(del_pos + initial_div_size, points.size());
-      parlay::sequence<point<dim>> pts;
+      parlay::sequence<batchKdTree::point<dim>> pts;
       pts.assign(del_points.cut(del_pos, next_pos));
       del_arr[sd].push_back(std::move(pts));
       del_pos = next_pos;
@@ -126,14 +126,14 @@ BENCH(dynamic_query, 2, BHLTree_t<2>, false)
                    //{10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
                    {5},
                    //{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 BENCH(dynamic_query, 2, LogTree_t<2>, true)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 5},
                    //{10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
                    {5},
                    //{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE, DS_VISUAL_VAR}});
+                   {DS_UNIFORM_FILL, DS_UNIFORM_SPHERE}});
 // BENCH(dynamic_query, 3)
 //->ArgsProduct({{10'000'000},
 //{10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
@@ -153,7 +153,7 @@ BENCH(dynamic_query, 5, BHLTree_t<5>, false)
                    // 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
                    {5},
                    //{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
 BENCH(dynamic_query, 5, LogTree_t<5>, true)
     ->ArgsProduct({{10'000'000},
                    {1, 2, 3, 5},
@@ -161,4 +161,4 @@ BENCH(dynamic_query, 5, LogTree_t<5>, true)
                    // 55, 60, 65, 70, 75, 80, 85, 90, 95, 100},
                    {5},
                    //{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
-                   {DS_UNIFORM_FILL, DS_VISUAL_VAR, DS_HOUSE_HOLD}});
+                   {DS_UNIFORM_FILL, DS_VISUAL_VAR}});
