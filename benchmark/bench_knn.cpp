@@ -104,32 +104,32 @@ static void bench_dual_knn(benchmark::State& state) {
 BENCH(knn, 2, COTree_t<2>, 0)
     ->ArgsProduct({{10'000'000},
                    {5},
-                   {DS_UNIFORM_FILL}});
+                   {DS_UNIFORM_FILL}})->Iterations(5);
 
 BENCH(knn, 2, BHLTree_t<2>, 0)
     ->ArgsProduct({{10'000'000},
                    {5},
-                   {DS_UNIFORM_FILL}});
+                   {DS_UNIFORM_FILL}})->Iterations(5);
 
 BENCH(knn, 2, LogTree_t<2>, 0)
     ->ArgsProduct({{10'000'000},
                    {5},
-                   {DS_UNIFORM_FILL}});
+                   {DS_UNIFORM_FILL}})->Iterations(5);
 
 BENCH(knn, 5, COTree_t<5>, 0)
     ->ArgsProduct({{10'000'000},
                    {5},
-                   {DS_UNIFORM_FILL}});
+                   {DS_UNIFORM_FILL}})->Iterations(5);
 
 BENCH(knn, 5, BHLTree_t<5>, 0)
     ->ArgsProduct({{10'000'000},
                    {5},
-                   {DS_UNIFORM_FILL}});
+                   {DS_UNIFORM_FILL}})->Iterations(5);
 
 BENCH(knn, 5, LogTree_t<5>, 0)
     ->ArgsProduct({{10'000'000},
                    {5},
-                   {DS_UNIFORM_FILL}});
+                   {DS_UNIFORM_FILL}})->Iterations(5);
 
 // Instantiate benchmarks
 // BENCH(knn, 2, COTree_t<2>, 0)
